@@ -1,26 +1,34 @@
 class Otazka {
-    constructor(jmeno_otazky, obrazek, id, otazky, spravna_odpoved) {
-        this.jmeno_otazky = jmeno_otazky;
-        this.obrazek = obrazek;
-        this.id = id;
-        this.otazky = otazky;
-        this.spravna_odpoved = spravna_odpoved;
+    constructor(data) {
+        this.jmeno_otazky = data[0];
+        this.obrazek = data[1];
+        this.id = data[2];
+        this.otazky = data[3];
+        this.spravna_odpoved = data[4];
     }
 }
 
-seznam_otazek = {
-    otazka0:["Čáp", "obrazek", 0, ["Option 1\n", "Option 2\n", "Option 3", "Option 4"], 0],
-    otazka1:["Bobr", "obrazek", 0, ["Option 1\n", "Option 2\n", "Option 3", "Option 4"], 1]}
+seznam_otazek = [
+    ["Čáp", "obrazek", 0, ["Option 1", "Option 2", "Option 3", "Option 4"], 0],
+    ["Bobr", "obrazek", 0, ["Option 1", "Option 2", "Option 3", "Option 4"], 1]
+]
 
 otazka = ""
+
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min));
+}
 
 function hrat() {
     content_div = document.getElementById("content_div");
 
     function vyhodnot(tip) {
+        text = document.getElementById("text");
         if (tip == otazka.spravna_odpoved) {
-            text.innerText = "To je správná odpověď";
-            content_div.appendChild(dalsi_button);
+            text.innerText = "To je správná odpověď.";
+            if (document.getElementById("dalsi") == null && seznam_otazek.length != 0) {
+                createNextButton();
+            }
         } else {
             text.innerText = "To je špatně!!!!";
         }
@@ -41,12 +49,12 @@ function hrat() {
     }
 
     function dalsi() {
-        random_otazka = Math.floor(Math.random() * Object.keys(seznam_otazek).length);
-
-        otazka = new Otazka(seznam_otazek["otazka" + random_otazka][0], seznam_otazek["otazka" + random_otazka][1], seznam_otazek["otazka" + random_otazka][2], seznam_otazek["otazka" + random_otazka][3], seznam_otazek["otazka" + random_otazka][4]);
-        delete seznam_otazek["otazka" + random_otazka];
+        random_otazka = randomInt(0, seznam_otazek.length);
+        otazka = new Otazka(seznam_otazek[random_otazka]);
+        seznam_otazek.splice(random_otazka, 1);
 
         document.getElementById("dalsi").remove();
+        document.getElementById("text").remove();
         document.getElementById("otazka_element").innerText = otazka.jmeno_otazky;
         for (let i = 0; i < 4; i++) {
             document.getElementById("otazka_button").remove();
@@ -60,14 +68,14 @@ function hrat() {
             content_div.appendChild(para);
         }
 
-        createNextButton();
+        createText();
     }
 
     function zobrazeni_otazky() {
-        random_otazka = Math.floor(Math.random() * Object.keys(seznam_otazek).length);
-
-        otazka = new Otazka(seznam_otazek["otazka" + random_otazka][0], seznam_otazek["otazka" + random_otazka][1], seznam_otazek["otazka" + random_otazka][2], seznam_otazek["otazka" + random_otazka][3], seznam_otazek["otazka" + random_otazka][4]);
-        delete seznam_otazek["otazka" + random_otazka];
+        random_otazka = randomInt(0, seznam_otazek.length);
+        console.log(random_otazka, seznam_otazek.length);
+        otazka = new Otazka(seznam_otazek[random_otazka]);
+        seznam_otazek.splice(random_otazka, 1);
 
         document.getElementById("hrat_button").style.display = "none";
         document.getElementById("otazka_element").innerText = otazka.jmeno_otazky;
@@ -83,5 +91,4 @@ function hrat() {
 
     zobrazeni_otazky();
     createText();
-    createNextButton();
 }
