@@ -3,7 +3,6 @@
   --background: rgb(28, 4, 32);
   --primary: rgb(129, 0, 138);
   --secondary: rgb(102, 49, 108);
-  --accent: rgb(225, 216, 45);
 }
 
 body, html {
@@ -18,9 +17,9 @@ body, html {
   button {
     font-family: "Science Gothic", sans-serif;
     color: var(--text);
-    border: 2px solid var(--accent);
+    border: 2px solid var(--primary);
     border-radius: 5px;
-    background: var(--primary);
+    background: var(--secondary);
     padding: 8px;
   }
 }
