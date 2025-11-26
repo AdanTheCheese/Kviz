@@ -26,26 +26,41 @@ function hrat() {
         }
     }
 
+    function createNextButton() {
+        const dalsi_button = document.createElement("button");
+        dalsi_button.setAttribute("id", "dalsi");
+        dalsi_button.addEventListener("click", () => dalsi());
+        dalsi_button.innerText = "Další otázka";
+        content_div.appendChild(dalsi_button);
+    }
+
+    function createText() {
+        const text = document.createElement("p");
+        text.setAttribute("id", "text");
+        content_div.appendChild(text);
+    }
+
     function dalsi() {
         random_otazka = Math.floor(Math.random() * Object.keys(seznam_otazek).length);
 
         otazka = new Otazka(seznam_otazek["otazka" + random_otazka][0], seznam_otazek["otazka" + random_otazka][1], seznam_otazek["otazka" + random_otazka][2], seznam_otazek["otazka" + random_otazka][3], seznam_otazek["otazka" + random_otazka][4]);
         delete seznam_otazek["otazka" + random_otazka];
 
+        document.getElementById("dalsi").remove();
         document.getElementById("otazka_element").innerText = otazka.jmeno_otazky;
         for (let i = 0; i < 4; i++) {
             document.getElementById("otazka_button").remove();
         }
-
+        
         for (let i = 0; i < otazka.otazky.length; i++) {
             const para = document.createElement("button");
             para.innerText = otazka.otazky[i];
             para.id = "otazka_button"
             para.addEventListener("click", () => vyhodnot(i));
-            document.body.appendChild(para);
-
-            document.body.appendChild(document.createElement("br"));
+            content_div.appendChild(para);
         }
+
+        createNextButton();
     }
 
     function zobrazeni_otazky() {
@@ -63,18 +78,10 @@ function hrat() {
             para.id = "otazka_button"
             para.addEventListener("click", () => vyhodnot(i));
             content_div.appendChild(para);
-
-            content_div.appendChild(document.createElement("br"));
         }
     }
 
-    zobrazeni_otazky()
-
-    const text = document.createElement("p");
-    content_div.appendChild(text);
-
-    const dalsi_button = document.createElement("button");
-    dalsi_button.addEventListener("click", () => dalsi());
-    dalsi_button.innerText = "Další otázka";
-    content_div.appendChild(dalsi_button);
+    zobrazeni_otazky();
+    createText();
+    createNextButton();
 }

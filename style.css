@@ -21,5 +21,11 @@ body, html {
     border-radius: 5px;
     background: var(--secondary);
     padding: 8px;
+    &:hover {
+      background: var(--primary);
+    }
+    &:active {
+      background: var(--secondary);
+    }
   }
 }
