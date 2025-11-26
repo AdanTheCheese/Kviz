@@ -16,10 +16,12 @@ seznam_otazek = {
 otazka = "" 
 
 function hrat() {
+    content_div = document.getElementById("content_div");
+
     function vyhodnot(tip) {
         if (tip == otazka.spravna_odpoved) {
             text.innerText = "To je správná odpověď";
-            document.body.appendChild(dalsi_button);
+            content_div.appendChild(dalsi_button);
         } else {
             text.innerText = "To je špatně!!!!";
         }
@@ -42,19 +44,19 @@ function hrat() {
             para.innerText = otazka.otazky[i];
             para.id = "otazka_button"
             para.addEventListener("click", () => vyhodnot(i));
-            document.body.appendChild(para);
+            content_div.appendChild(para);
 
-            document.body.appendChild(document.createElement("br"));
+            content_div.appendChild(document.createElement("br"));
         }
     }
 
     zobrazeni_otazky()
 
     const text = document.createElement("p");
-    document.body.appendChild(text);
+    content_div.appendChild(text);
 
     const dalsi_button = document.createElement("button");
     dalsi_button.addEventListener("click", () => dalsi());
     dalsi_button.innerText = "Další otázka";
-    document.body.appendChild(dalsi_button);
+    content_div.appendChild(dalsi_button);
 }

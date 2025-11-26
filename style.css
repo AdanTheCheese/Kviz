@@ -1,0 +1,26 @@
+:root {
+  --text: rgb(247, 219, 250);
+  --background: rgb(28, 4, 32);
+  --primary: rgb(129, 0, 138);
+  --secondary: rgb(102, 49, 108);
+  --accent: rgb(225, 216, 45);
+}
+
+body, html {
+  font-family: "Science Gothic", sans-serif;
+  color: var(--text);
+  background: var(--background);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  button {
+    font-family: "Science Gothic", sans-serif;
+    color: var(--text);
+    border: 2px solid var(--accent);
+    border-radius: 5px;
+    background: var(--primary);
+    padding: 8px;
+  }
+}
