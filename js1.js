@@ -25,12 +25,14 @@ function hrat() {
     function vyhodnot(tip) {
         text = document.getElementById("text");
         if (tip == otazka.spravna_odpoved) {
-            text.innerText = "To je správná odpověď.";
             if (document.getElementById("dalsi") == null && seznam_otazek.length != 0) {
                 createNextButton();
+            } else if (seznam_otazek.length === 0) {
+               return text.innerText = "Posledná otázka. To je správná odpověď.";
             }
+            return text.innerText = "To je správná odpověď.";
         } else {
-            text.innerText = "To je špatně!!!!";
+            return text.innerText = "To je špatně!!!!";
         }
     }
 
